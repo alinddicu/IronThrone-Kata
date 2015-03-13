@@ -180,12 +180,12 @@
 
             public double Calculer(Dictionary<Volumes, int> panier)
             {
-                DeduireListeExemplaires(panier);
+                ConstruireListeExemplaires(panier);
                 while (_listeExemplaires.Count != 0)
                 {
-                    var groupeVolumes = CreateGroupeVolumes();
+                    var groupeVolumes = GrouperExemplaireEnVolumes();
 
-                    SupprimerExemplairesDuGroupeVolumes(groupeVolumes);
+                    EneverExemplairesTraitesParGroupeVolumes(groupeVolumes);
 
                     _groupesVolumes.Add(groupeVolumes);
                 }
@@ -193,7 +193,7 @@
                 return CalculerPrixPourGroupesVolumes();
             }
 
-            private void DeduireListeExemplaires(Dictionary<Volumes, int> panier)
+            private void ConstruireListeExemplaires(Dictionary<Volumes, int> panier)
             {
                 foreach (var volume in panier.Keys)
                 {
@@ -215,7 +215,7 @@
                 return prix;
             }
 
-            private void SupprimerExemplairesDuGroupeVolumes(List<Volumes> groupeVolumes)
+            private void EneverExemplairesTraitesParGroupeVolumes(List<Volumes> groupeVolumes)
             {
                 foreach (var volume in groupeVolumes)
                 {
@@ -223,7 +223,7 @@
                 }
             }
 
-            private List<Volumes> CreateGroupeVolumes()
+            private List<Volumes> GrouperExemplaireEnVolumes()
             {
                 var groupeVolumes = new List<Volumes>();
                 foreach (var exemplaire in _listeExemplaires)
