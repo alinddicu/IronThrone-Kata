@@ -23,14 +23,14 @@
         {
             ConstruireListeExemplaires(panier);
             RemplirGroupesVolumes();
-            MaximiserPrixGroupesVolumes();
+            var groupesVolumes = MaximiserPrixGroupesVolumes();
 
-            return CalculerPrixPourGroupesVolumes();
+            return CalculerPrixPourGroupesVolumes(groupesVolumes);
         }
 
-        private void MaximiserPrixGroupesVolumes()
+        private List<GroupeVolumes> MaximiserPrixGroupesVolumes()
         {
-            //throw new NotImplementedException();
+            return _groupesVolumes;
         }
 
         private void RemplirGroupesVolumes()
@@ -56,12 +56,12 @@
             }
         }
 
-        private double CalculerPrixPourGroupesVolumes()
+        private double CalculerPrixPourGroupesVolumes(List<GroupeVolumes> groupesVolumes)
         {
             var prix = 0.0;
-            foreach (var groupeVolumes in _groupesVolumes)
+            foreach (var groupeVolumes in groupesVolumes)
             {
-                prix += groupeVolumes.GetPrix(PrixUnitaire, CoeffsReductions);
+                prix += groupeVolumes.GetPrix();
             }
 
             return prix;
@@ -77,7 +77,7 @@
 
         private GroupeVolumes CreerGroupeVolumes()
         {
-            var groupeVolumes = new GroupeVolumes();
+            var groupeVolumes = new GroupeVolumes(PrixUnitaire, CoeffsReductions);
             foreach (var exemplaire in _listeExemplaires)
             {
                 groupeVolumes.AddExemplaire(exemplaire);
