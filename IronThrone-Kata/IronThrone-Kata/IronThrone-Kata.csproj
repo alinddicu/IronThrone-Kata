@@ -34,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="NFluent">
       <HintPath>..\packages\NFluent.1.3.1.0\lib\net40\NFluent.dll</HintPath>
@@ -55,10 +56,12 @@
   <ItemGroup>
     <Compile Include="Logique\Calculette.cs" />
     <Compile Include="Logique\GroupeVolumes.cs" />
-    <Compile Include="Logique\PrixGroupesVolumesMinimizer.cs" />
+    <Compile Include="Logique\Panier.cs" />
+    <Compile Include="Logique\PrixPanierMinimizer.cs" />
     <Compile Include="Test\CalculetteTest.cs" />
     <Compile Include="Test\GroupeVolumesTest.cs" />
-    <Compile Include="Test\PrixGroupesVolumesMinimizerTest.cs" />
+    <Compile Include="Test\PanierTest.cs" />
+    <Compile Include="Test\PrixPanierMinimizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logique\Volume.cs" />
   </ItemGroup>

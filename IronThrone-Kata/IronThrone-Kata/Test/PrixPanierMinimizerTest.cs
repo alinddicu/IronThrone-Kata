@@ -6,7 +6,7 @@
     using NFluent;
 
     [TestClass]
-    public class PrixGroupesVolumesMinimizerTest
+    public class PrixPanierMinimizerTest
     {
         private const int PrixUnitaire = 8;
 
@@ -19,12 +19,12 @@
             {5, 0.75},
         };
 
-        private PrixGroupesVolumesMinimizer _minimizer;
+        private PrixPanierMinimizer _minimizer;
 
         [TestInitialize]
         public void Initialize()
         {
-            _minimizer = new PrixGroupesVolumesMinimizer();
+            _minimizer = new PrixPanierMinimizer();
         }
 
         [TestMethod]
@@ -42,7 +42,9 @@
             groupe2.AddExemplaire(Volume.V2);
             groupe2.AddExemplaire(Volume.V3);
 
-            var listeGroupesEntree = new List<GroupeVolumes> { groupe1, groupe2 };
+            var panierEntree = new Panier();
+            panierEntree.AddGroupeVolume(groupe1);
+            panierEntree.AddGroupeVolume(groupe2);
 
             var groupe3 = new GroupeVolumes(PrixUnitaire, CoeffsReductions);
             groupe3.AddExemplaire(Volume.V1);
@@ -56,9 +58,11 @@
             groupe4.AddExemplaire(Volume.V3);
             groupe4.AddExemplaire(Volume.V4);
 
-            var listeGroupesSortie = new List<GroupeVolumes> { groupe3, groupe4 };
+            var panierSortie = new Panier();
+            panierSortie.AddGroupeVolume(groupe3);
+            panierSortie.AddGroupeVolume(groupe4);
 
-            Check.That(_minimizer.Minimizer(listeGroupesEntree)).ContainsExactly(listeGroupesSortie);
+            Check.That(_minimizer.Minimizer(panierEntree)).IsEqualTo(panierSortie);
         }
     }
 }

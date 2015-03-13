@@ -16,32 +16,32 @@
             {5, 0.75},
         };
 
-        private readonly List<Volume> _listeExemplaires = new List<Volume>();
-        private readonly List<GroupeVolumes> _groupesVolumes = new List<GroupeVolumes>();
+        private readonly List<Volume> _exemplairesAchetes = new List<Volume>();
+        private readonly Panier _panier = new Panier();
 
-        public double Calculer(Dictionary<Volume, int> panier)
+        public double Calculer(Dictionary<Volume, int> volumesAchetes)
         {
-            ConstruireListeExemplaires(panier);
+            ConstruireListeExemplaires(volumesAchetes);
             RemplirGroupesVolumes();
-            var groupesVolumes = MinimisePrixGroupesVolumes();
+            var panierMinimise = MinimisePrixGroupesVolumes();
 
-            return CalculerPrixPourGroupesVolumes(groupesVolumes);
+            return panierMinimise.CalculerPrix();
         }
 
-        private IEnumerable<GroupeVolumes> MinimisePrixGroupesVolumes()
+        private Panier MinimisePrixGroupesVolumes()
         {
-            return _groupesVolumes;
+            return _panier;
         }
 
         private void RemplirGroupesVolumes()
         {
-            while (_listeExemplaires.Any())
+            while (_exemplairesAchetes.Any())
             {
                 var groupeVolumes = CreerGroupeVolumes();
 
                 EnleverExemplairesTraitesParGroupeVolumes(groupeVolumes);
 
-                _groupesVolumes.Add(groupeVolumes);
+                _panier.AddGroupeVolume(groupeVolumes);
             }
         }
 
@@ -51,28 +51,23 @@
             {
                 for (var i = 0; i < panier[volume]; i++)
                 {
-                    _listeExemplaires.Add(volume);
+                    _exemplairesAchetes.Add(volume);
                 }
             }
-        }
-
-        private static double CalculerPrixPourGroupesVolumes(IEnumerable<GroupeVolumes> groupesVolumes)
-        {
-            return groupesVolumes.Sum(groupeVolumes => groupeVolumes.GetPrix());
         }
 
         private void EnleverExemplairesTraitesParGroupeVolumes(GroupeVolumes groupeVolumes)
         {
             foreach (var volume in groupeVolumes.GetVolumes())
             {
-                _listeExemplaires.Remove(volume);
+                _exemplairesAchetes.Remove(volume);
             }
         }
 
         private GroupeVolumes CreerGroupeVolumes()
         {
             var groupeVolumes = new GroupeVolumes(PrixUnitaire, CoeffsReductions);
-            foreach (var exemplaire in _listeExemplaires)
+            foreach (var exemplaire in _exemplairesAchetes)
             {
                 groupeVolumes.AddExemplaire(exemplaire);
             }
