@@ -137,6 +137,22 @@
             Check.That(_calculette.Calculer(panier)).IsEqualTo(51.20);
         }
 
+        [TestMethod]
+        [Ignore]
+        public void Given44422WhenCalculerPrixThenReturn102v40()
+        {
+            var panier = new Dictionary<Volumes, int>
+            {
+                {Volumes.V1, 4},
+                {Volumes.V2, 4},
+                {Volumes.V3, 4},
+                {Volumes.V4, 2},
+                {Volumes.V5, 2}
+            };
+
+            Check.That(_calculette.Calculer(panier)).IsEqualTo(102.40);
+        }
+
         public enum Volumes
         {
             V1,
@@ -150,10 +166,6 @@
         {
             private const int PrixUnitaire = 8;
 
-            private readonly List<Volumes> _listeExemplaires = new List<Volumes>();
-
-            private readonly List<List<Volumes>> _groupesVolumes = new List<List<Volumes>>();
-
             private static readonly Dictionary<int, double> CoeffReduction = new Dictionary<int, double>
             {
                 {1, 1},
@@ -162,6 +174,24 @@
                 {4, 0.80},
                 {5, 0.75},
             };
+
+            private readonly List<Volumes> _listeExemplaires = new List<Volumes>();
+            private readonly List<List<Volumes>> _groupesVolumes = new List<List<Volumes>>();
+
+            public double Calculer(Dictionary<Volumes, int> panier)
+            {
+                DeduireListeExemplaires(panier);
+                while (_listeExemplaires.Count != 0)
+                {
+                    var groupeVolumes = CreateGroupeVolumes();
+
+                    SupprimerExemplairesDuGroupeVolumes(groupeVolumes);
+
+                    _groupesVolumes.Add(groupeVolumes);
+                }
+
+                return CalculerPrixPourGroupesVolumes();
+            }
 
             private void DeduireListeExemplaires(Dictionary<Volumes, int> panier)
             {
@@ -174,36 +204,36 @@
                 }
             }
 
-            public double Calculer(Dictionary<Volumes, int> panier)
+            private double CalculerPrixPourGroupesVolumes()
             {
-                DeduireListeExemplaires(panier);
-                while (_listeExemplaires.Count != 0)
-                {
-                    var groupeVolumes = new List<Volumes>();
-                    foreach (var exemplaire in _listeExemplaires)
-                    {
-                        if (!groupeVolumes.Contains(exemplaire))
-                        {
-                            groupeVolumes.Add(exemplaire);
-                        }
-                    }
-
-                    foreach (var volume in groupeVolumes)
-                    {
-                        _listeExemplaires.Remove(volume);
-                    }
-
-                    _groupesVolumes.Add(groupeVolumes);
-                }
-
                 var prix = 0.0;
                 foreach (var groupeVolumes in _groupesVolumes)
                 {
                     var nombreVolumes = groupeVolumes.Count;
                     prix += nombreVolumes * PrixUnitaire * CoeffReduction[nombreVolumes];
                 }
-
                 return prix;
+            }
+
+            private void SupprimerExemplairesDuGroupeVolumes(List<Volumes> groupeVolumes)
+            {
+                foreach (var volume in groupeVolumes)
+                {
+                    _listeExemplaires.Remove(volume);
+                }
+            }
+
+            private List<Volumes> CreateGroupeVolumes()
+            {
+                var groupeVolumes = new List<Volumes>();
+                foreach (var exemplaire in _listeExemplaires)
+                {
+                    if (!groupeVolumes.Contains(exemplaire))
+                    {
+                        groupeVolumes.Add(exemplaire);
+                    }
+                }
+                return groupeVolumes;
             }
         }
     }
