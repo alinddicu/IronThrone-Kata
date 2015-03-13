@@ -55,7 +55,10 @@
   <ItemGroup>
     <Compile Include="Logique\Calculette.cs" />
     <Compile Include="Logique\GroupeVolumes.cs" />
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="Logique\PrixGroupesVolumesMinimizer.cs" />
+    <Compile Include="Test\CalculetteTest.cs" />
+    <Compile Include="Test\GroupeVolumesTest.cs" />
+    <Compile Include="Test\PrixGroupesVolumesMinimizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logique\Volume.cs" />
   </ItemGroup>

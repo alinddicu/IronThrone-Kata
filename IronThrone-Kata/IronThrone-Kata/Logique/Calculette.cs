@@ -8,13 +8,13 @@
         private const int PrixUnitaire = 8;
 
         private static readonly Dictionary<int, double> CoeffsReductions = new Dictionary<int, double>
-            {
-                {1, 1},
-                {2, 0.95},
-                {3, 0.90},
-                {4, 0.80},
-                {5, 0.75},
-            };
+        {
+            {1, 1},
+            {2, 0.95},
+            {3, 0.90},
+            {4, 0.80},
+            {5, 0.75},
+        };
 
         private readonly List<Volume> _listeExemplaires = new List<Volume>();
         private readonly List<GroupeVolumes> _groupesVolumes = new List<GroupeVolumes>();
@@ -23,12 +23,12 @@
         {
             ConstruireListeExemplaires(panier);
             RemplirGroupesVolumes();
-            var groupesVolumes = MaximiserPrixGroupesVolumes();
+            var groupesVolumes = MinimisePrixGroupesVolumes();
 
             return CalculerPrixPourGroupesVolumes(groupesVolumes);
         }
 
-        private List<GroupeVolumes> MaximiserPrixGroupesVolumes()
+        private List<GroupeVolumes> MinimisePrixGroupesVolumes()
         {
             return _groupesVolumes;
         }
