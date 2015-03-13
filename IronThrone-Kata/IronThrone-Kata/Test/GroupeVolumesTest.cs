@@ -1,7 +1,7 @@
 ﻿namespace IronThroneKata.Test
 {
     using System.Collections.Generic;
-    using IronThroneKata.Logique;
+    using Logique;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NFluent;
 

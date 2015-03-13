@@ -1,7 +1,7 @@
 ﻿namespace IronThroneKata.Logique
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Calculette
     {
@@ -56,15 +56,9 @@
             }
         }
 
-        private double CalculerPrixPourGroupesVolumes(List<GroupeVolumes> groupesVolumes)
+        private static double CalculerPrixPourGroupesVolumes(IEnumerable<GroupeVolumes> groupesVolumes)
         {
-            var prix = 0.0;
-            foreach (var groupeVolumes in groupesVolumes)
-            {
-                prix += groupeVolumes.GetPrix();
-            }
-
-            return prix;
+            return groupesVolumes.Sum(groupeVolumes => groupeVolumes.GetPrix());
         }
 
         private void EnleverExemplairesTraitesParGroupeVolumes(GroupeVolumes groupeVolumes)

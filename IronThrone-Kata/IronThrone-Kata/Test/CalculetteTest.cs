@@ -32,7 +32,7 @@
         }
 
         [TestMethod]
-        public void Given11000WhenCalculerPrixThenReturn15v20()
+        public void Given11000WhenCalculerPrixThenReturn15V20()
         {
             var panier = new Dictionary<Volume, int>
             {
@@ -47,7 +47,7 @@
         }
 
         [TestMethod]
-        public void Given11100WhenCalculerPrixThenReturn21v60()
+        public void Given11100WhenCalculerPrixThenReturn21V60()
         {
             var panier = new Dictionary<Volume, int>
             {
@@ -62,7 +62,7 @@
         }
 
         [TestMethod]
-        public void Given11110WhenCalculerPrixThenReturn25v60()
+        public void Given11110WhenCalculerPrixThenReturn25V60()
         {
             var panier = new Dictionary<Volume, int>
             {
@@ -107,7 +107,7 @@
         }
 
         [TestMethod]
-        public void Given20000WhenCalculerPrixThenReturn23v20()
+        public void Given20000WhenCalculerPrixThenReturn23V20()
         {
             var panier = new Dictionary<Volume, int>
             {
@@ -123,7 +123,7 @@
 
         [TestMethod]
         [Ignore]
-        public void Given22211WhenCalculerPrixThenReturn51v20()
+        public void Given22211WhenCalculerPrixThenReturn51V20()
         {
             var panier = new Dictionary<Volume, int>
             {
@@ -139,7 +139,7 @@
 
         [TestMethod]
         [Ignore]
-        public void Given44422WhenCalculerPrixThenReturn102v40()
+        public void Given44422WhenCalculerPrixThenReturn102V40()
         {
             var panier = new Dictionary<Volume, int>
             {

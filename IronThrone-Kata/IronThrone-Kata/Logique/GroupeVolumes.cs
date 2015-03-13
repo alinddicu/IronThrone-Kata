@@ -15,11 +15,6 @@
             _coeffsReductions = coeffsReductions;
         }
 
-        public bool Contains(Volume exemplaire)
-        {
-            return _volumes.Contains(exemplaire);
-        }
-
         public void AddExemplaire(Volume exemplaire)
         {
             if (!_volumes.Contains(exemplaire))
@@ -46,22 +41,17 @@
                 return false;
             }
 
-            if (ReferenceEquals(obj, this))
-            {
-                return true;
-            }
-
-            return this.Equals((GroupeVolumes)obj);
+            return ReferenceEquals(obj, this) || Equals((GroupeVolumes)obj);
         }
 
         private bool Equals(GroupeVolumes other)
         {
-            return Enumerable.SequenceEqual(this.GetVolumes(), other.GetVolumes());
+            return GetVolumes().SequenceEqual(other.GetVolumes());
         }
 
         public override string ToString()
         {
-            var joinResult = string.Join(", ", this.GetVolumes().ToArray());
+            var joinResult = string.Join(", ", GetVolumes().ToArray());
 
             return "{" + joinResult + "}";
         }
