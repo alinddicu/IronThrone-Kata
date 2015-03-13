@@ -181,16 +181,21 @@
             public double Calculer(Dictionary<Volumes, int> panier)
             {
                 ConstruireListeExemplaires(panier);
+                RemplirGroupesVolumes();
+
+                return CalculerPrixPourGroupesVolumes();
+            }
+
+            private void RemplirGroupesVolumes()
+            {
                 while (_listeExemplaires.Count != 0)
                 {
                     var groupeVolumes = GrouperExemplaireEnVolumes();
 
-                    EneverExemplairesTraitesParGroupeVolumes(groupeVolumes);
+                    EnleverExemplairesTraitesParGroupeVolumes(groupeVolumes);
 
                     _groupesVolumes.Add(groupeVolumes);
                 }
-
-                return CalculerPrixPourGroupesVolumes();
             }
 
             private void ConstruireListeExemplaires(Dictionary<Volumes, int> panier)
@@ -215,7 +220,7 @@
                 return prix;
             }
 
-            private void EneverExemplairesTraitesParGroupeVolumes(List<Volumes> groupeVolumes)
+            private void EnleverExemplairesTraitesParGroupeVolumes(List<Volumes> groupeVolumes)
             {
                 foreach (var volume in groupeVolumes)
                 {
