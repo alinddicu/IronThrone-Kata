@@ -28,14 +28,14 @@
             return CalculerPrixPourGroupesVolumes(groupesVolumes);
         }
 
-        private List<GroupeVolumes> MinimisePrixGroupesVolumes()
+        private IEnumerable<GroupeVolumes> MinimisePrixGroupesVolumes()
         {
             return _groupesVolumes;
         }
 
         private void RemplirGroupesVolumes()
         {
-            while (_listeExemplaires.Count != 0)
+            while (_listeExemplaires.Any())
             {
                 var groupeVolumes = CreerGroupeVolumes();
 
