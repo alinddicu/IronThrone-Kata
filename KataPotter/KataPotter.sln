@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronThrone-Kata", "IronThrone-Kata\IronThrone-Kata.csproj", "{C5FF694B-4197-4328-8CD7-62CE62BF3861}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataPotter", "KataPotter\KataPotter.csproj", "{C5FF694B-4197-4328-8CD7-62CE62BF3861}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

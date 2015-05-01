@@ -28,6 +28,7 @@
         }
 
         [TestMethod]
+        [Ignore]
         public void Given11111And11100WhenMinimizeThenReturn11110And11110()
         {
             var groupe1 = new GroupeVolumes(PrixUnitaire, CoeffsReductions);
